@@ -1,0 +1,151 @@
+{
+  "directory": "STEM-CardMatch",
+  "repo": "kart-eslestirme",
+  "title": "Card Match",
+  "turkish": "Kart Eşleştirme",
+  "kind": "CARDS",
+  "cls": "CardMatchGame",
+  "modes": [
+    {
+      "scene": "BolmeIslemiMatching",
+      "title": "Bölme",
+      "english": "Division",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 0,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": [
+        "/"
+      ]
+    },
+    {
+      "scene": "CarpmaIslemiMatching",
+      "title": "Çarpma",
+      "english": "Multiplication",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 0,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": [
+        "x"
+      ]
+    },
+    {
+      "scene": "CikarmaIslemiMatching",
+      "title": "Çıkarma",
+      "english": "Subtraction",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 0,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": [
+        "-"
+      ]
+    },
+    {
+      "scene": "DortIslemMatching",
+      "title": "Dört İşlem",
+      "english": "Mixed arithmetic",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 0,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": [
+        "+",
+        "-",
+        "x",
+        "/"
+      ]
+    },
+    {
+      "scene": "OruntuMatching",
+      "title": "Örüntüler",
+      "english": "Number sequences",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 3,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": []
+    },
+    {
+      "scene": "RomenRakamlariMatching",
+      "title": "Romen Rakamları",
+      "english": "Roman numerals",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 1,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": []
+    },
+    {
+      "scene": "ToplamaIslemiMatching",
+      "title": "Toplama",
+      "english": "Addition",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 0,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": [
+        "+"
+      ]
+    },
+    {
+      "scene": "ZamanSaatMatching",
+      "title": "Saatler",
+      "english": "Times",
+      "stemGameType": 3,
+      "isRandom": 0,
+      "isDynamicMode": 0,
+      "isReverseMode": 0,
+      "targetType": 1,
+      "cardMatchGameTargetType": 2,
+      "bubbleGameMode": 0,
+      "step": 0,
+      "x": 0,
+      "y": 10,
+      "operators": []
+    }
+  ]
+}
