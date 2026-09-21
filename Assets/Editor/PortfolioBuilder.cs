@@ -145,7 +145,6 @@ public static class PortfolioBuilder
     static GameObject Bubble()
     {
         var r=Panel(null,"Bubble",0,0,106,106,Accent);r.anchorMin=r.anchorMax=r.pivot=new Vector2(.5f,.5f);
-        // Procedural vector-like circle, no external artwork.
         string path="Assets/Game/Generated/Bubble.asset";
         var sprite=AssetDatabase.LoadAssetAtPath<Sprite>(path);
         if(!sprite){var texture=new Texture2D(128,128,TextureFormat.RGBA32,false);for(int y=0;y<128;y++)for(int x=0;x<128;x++){float d=Vector2.Distance(new Vector2(x+.5f,y+.5f),new Vector2(64,64));texture.SetPixel(x,y,new Color(1,1,1,Mathf.Clamp01(63-d)));}texture.Apply();sprite=Sprite.Create(texture,new Rect(0,0,128,128),new Vector2(.5f,.5f),128);AssetDatabase.CreateAsset(sprite,path);AssetDatabase.AddObjectToAsset(texture,sprite);}

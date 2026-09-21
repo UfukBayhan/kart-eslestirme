@@ -41,7 +41,6 @@ public class StemGameManager : MonoBehaviour
 
     [Header("CardMatchGame Settings")]
 
-    // OddOrEvenGame için özel ayarlar
     [Header("Odd Or Even Settings")]
 
     [Header("InputGames Settings")]
@@ -93,7 +92,6 @@ public class StemGameManager : MonoBehaviour
             currentTime += Time.deltaTime;
     }
 
-    // UST puanını artırır
     public void AddUst()
     {
         int GuncelUst = PlayerPrefs.GetInt("kart-eslestirme.Score", 0) + 1;
@@ -103,7 +101,6 @@ public class StemGameManager : MonoBehaviour
             _UST.text = GuncelUst.ToString();
     }
 
-    // SFX objelerini temizler
     public void DestroyAllSFX()
     {
         var allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
@@ -114,7 +111,6 @@ public class StemGameManager : MonoBehaviour
         }
     }
 
-    // Ana menüye veya önceki sahneye dönüş
     public void LoadBackScene()
     {
         if (isLoadingBackScene) return;

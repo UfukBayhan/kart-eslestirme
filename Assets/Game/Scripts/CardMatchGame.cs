@@ -23,7 +23,6 @@ public class CardMatchGame : MonoBehaviour
 
     private bool levelTransitioning = false;
 
-    // ============ OBJECT POOLING SYSTEM ============
     private Queue<GameObject> cardPool = new Queue<GameObject>();
     private List<GameObject> activeCards = new List<GameObject>();
     private const int INITIAL_POOL_SIZE = 20;
@@ -41,13 +40,11 @@ public class CardMatchGame : MonoBehaviour
 
     private GridLayoutGroup gridLayoutGroup;
 
-    // ============ CACHED COMPONENTS ============
     private AudioSource currentSfxSource;
     private Dictionary<GameObject, UnityAction> cachedButtonActions =
         new Dictionary<GameObject, UnityAction>();
     private StringBuilder stringBuilder = new StringBuilder(100);
 
-    // ============ CACHED DATA STRUCTURES ============
     private List<CardCreateInfo> reusableCreateList = new List<CardCreateInfo>(20);
     private HashSet<int> reusableHashSet = new HashSet<int>();
     private HashSet<string> reusableStringSet = new HashSet<string>();
@@ -141,7 +138,6 @@ public class CardMatchGame : MonoBehaviour
                 ?? objectParent.AddComponent<GridLayoutGroup>();
     }
 
-    // ============ OBJECT POOLING IMPLEMENTATION ============
     private void InitializeObjectPool()
     {
         if (cardPrefab == null || objectParent == null)
@@ -194,7 +190,6 @@ public class CardMatchGame : MonoBehaviour
         if (card == null)
             return;
 
-        // Kartı temizle
         Button btn = card.GetComponent<Button>();
         if (btn != null)
         {
@@ -202,7 +197,6 @@ public class CardMatchGame : MonoBehaviour
             btn.interactable = true;
         }
 
-        // Child objeleri resetle
         Transform emptyT = card.transform.GetChild(0);
         if (emptyT != null)
         {
@@ -224,7 +218,6 @@ public class CardMatchGame : MonoBehaviour
 
     private void CleanupObjectPool()
     {
-        // Aktif kartları temizle
         foreach (var card in activeCards)
         {
             if (card != null)
@@ -237,7 +230,6 @@ public class CardMatchGame : MonoBehaviour
         }
         activeCards.Clear();
 
-        // Pool'daki kartları temizle
         while (cardPool.Count > 0)
         {
             var card = cardPool.Dequeue();
@@ -249,7 +241,6 @@ public class CardMatchGame : MonoBehaviour
         cachedButtonActions.Clear();
     }
 
-    // ============ GAME SETUP (POOLING İLE) ============
     private void SetupGame()
     {
         if (objectParent == null)
@@ -257,7 +248,6 @@ public class CardMatchGame : MonoBehaviour
 
         ClearCards();
 
-        // Reusable list kullan
         reusableCreateList.Clear();
         GenerateCardsForGameMode(reusableCreateList);
 
@@ -294,7 +284,6 @@ public class CardMatchGame : MonoBehaviour
         }
     }
 
-    // ============ OPTIMIZED CLEAR CARDS (POOLING) ============
     private void ClearCards()
     {
         // Kartları pool'a geri döndür (destroy etme!)
@@ -317,7 +306,6 @@ public class CardMatchGame : MonoBehaviour
         Debug.Log($"[ObjectPool] Cleared {cardsToReturn.Count} cards, Pool size: {cardPool.Count}");
     }
 
-    // ============ OPTIMIZED INSTANTIATE (POOLING) ============
     private void InstantiateCard(List<CardCreateInfo> createList)
     {
         for (int i = 0; i < createList.Count; i++)
@@ -392,13 +380,11 @@ public class CardMatchGame : MonoBehaviour
         {
             int length = 5;
 
-            // ✅ YENİ: out parametresiyle cevabı al
             List<int> sequence = GeneratePattern(patternType, length, min, max, out int answer);
 
             if (sequence == null || sequence.Count != length)
                 continue;
 
-            // Cevap range içinde mi kontrol et
             if (answer < min || answer > max)
                 continue;
 
@@ -408,7 +394,6 @@ public class CardMatchGame : MonoBehaviour
 
             reusableHashSet.Add(answer);
 
-            // ? işaretini koy
             int missingIndex = sequence.IndexOf(answer);
 
             stringBuilder.Clear();
@@ -436,7 +421,7 @@ public class CardMatchGame : MonoBehaviour
 
         switch (type)
         {
-            // ➕ Basit Aritmetik (+1, +2, +5, +10)
+            // Basit Aritmetik (+1, +2, +5, +10)
             case "arithmetic_easy":
                 int[] stepsEasy = { 1, 2, 5, 10 };
                 int stepEasy = stepsEasy[sharedRandom.Next(stepsEasy.Length)];
@@ -458,7 +443,7 @@ public class CardMatchGame : MonoBehaviour
                 }
                 break;
 
-            // 🔙 Geriye Sayma (-2, -3, -4, -5)
+            // Geriye Sayma (-2, -3, -4, -5)
             case "arithmetic_reverse":
                 int[] stepsNeg = { -2, -3, -4, -5 };
                 int stepNeg = stepsNeg[sharedRandom.Next(stepsNeg.Length)];
@@ -478,7 +463,7 @@ public class CardMatchGame : MonoBehaviour
                 }
                 break;
 
-            // ✖️ Çarpım Tablosu (×2, ×3, ×5, ×6)
+            // Çarpım Tablosu (×2, ×3, ×5, ×6)
             case "multiplication":
                 int[] mults = { 2, 3, 5, 6 };
                 int multiplier = mults[sharedRandom.Next(mults.Length)];
@@ -505,7 +490,7 @@ public class CardMatchGame : MonoBehaviour
                 answer = seq[startPos];
                 break;
 
-            // 🧮 İleri Matematik (Kare, Fibonacci)
+            // İleri Matematik (Kare, Fibonacci)
             case "advanced_math":
                 bool isFibo = sharedRandom.Next(0, 2) == 0;
 
@@ -555,7 +540,7 @@ public class CardMatchGame : MonoBehaviour
                 }
                 break;
 
-            // 🧩 Karma (×2+1 veya Geometrik)
+            // Karma (×2+1 veya Geometrik)
             case "complex":
                 bool useMultiplyPlus = sharedRandom.Next(0, 2) == 0;
 
@@ -626,7 +611,6 @@ public class CardMatchGame : MonoBehaviour
             return "complex"; // geometrik, karma
     }
 
-    // ============ SAAT KARTLARI ============
     private void GenerateTimeAndClockCards(List<CardCreateInfo> outList)
     {
         int minuteStep = GetMinuteStepForLevel(levelIndex);
@@ -790,7 +774,6 @@ public class CardMatchGame : MonoBehaviour
         return 'a';
     }
 
-    // ============ MATEMATİK İŞLEMLERİ ============
     private void GenerateMathOperationCards(List<CardCreateInfo> outList)
     {
         Vector2 range = (stem != null) ? stem.numberRangeXY : new Vector2(1, 20);
@@ -1009,7 +992,6 @@ public class CardMatchGame : MonoBehaviour
         return Mathf.Clamp(Mathf.RoundToInt(up), 3, 25);
     }
 
-    // ============ ROMA RAKAMLARI ============
     private void GenerateRomanNumeralCards(List<CardCreateInfo> outList)
     {
         Vector2 range = (stem != null) ? stem.numberRangeXY : new Vector2(1, 20);
@@ -1074,7 +1056,6 @@ public class CardMatchGame : MonoBehaviour
         return res;
     }
 
-    // ============ HELPER METHODS ============
     private void AddCardPair(List<CardCreateInfo> list, int value, string display1, string display2)
     {
         list.Add(
@@ -1147,7 +1128,6 @@ public class CardMatchGame : MonoBehaviour
         return cols;
     }
 
-    // ============ GAME LOGIC ============
     private void OnCardClicked(GameObject go)
     {
         if (isProcessing || levelTransitioning)
@@ -1298,7 +1278,6 @@ public class CardMatchGame : MonoBehaviour
         currentSfxSource = SoundFX.GetComponent<AudioSource>();
     }
 
-    // ============ LEVEL MANAGEMENT ============
     private void ApplyDifficultyForLevel(int level)
     {
         pairsCount = GetPairsForLevel(level);
@@ -1336,7 +1315,6 @@ public class CardMatchGame : MonoBehaviour
         int bracket = Mathf.Min(level / 10, 4);
         var ranges = LevelRanges[gameMode];
 
-        // Her ihtimale karşı ekstra güvenlik:
         bracket = Mathf.Min(bracket, ranges.Length - 1);
 
         return new Vector2Int(ranges[bracket].Item1, ranges[bracket].Item2);
@@ -1444,7 +1422,6 @@ public class CardMatchGame : MonoBehaviour
         }
     }
 
-    // ============ DATA STRUCTURES ============
     private class CardInfo
     {
         public GameObject root;

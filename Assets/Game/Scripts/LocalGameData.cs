@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-// Session-only data. This preview has no account or server dependency.
+// Local session data.
 [Serializable]
 public class GameData
 {
